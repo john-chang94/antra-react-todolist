@@ -18,6 +18,9 @@ export default function TodoList({
           handleDeleteTodo={handleDeleteTodo}
         />
       ))}
+      {!todos.length && (
+        <p style={{ textAlign: "center" }}>No todos yet</p>
+      )}
     </section>
   );
 }

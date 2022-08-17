@@ -10,20 +10,28 @@ export default function Form({ handleAddTodo, handleClearTodos }) {
     setTodo("");
   };
 
+  const onClear = () => {
+    handleClearTodos();
+  };
+
   return (
-    <form className="input__wrapper flex justify-center" onSubmit={onSubmit}>
-      <div>
-        <input
-          type="text"
-          className="text-input"
-          value={todo}
-          onChange={({ target }) => setTodo(target.value)}
-        />
-      </div>
-      <div>
-        <input type="submit" className="button__submit" value="submit" />
-        <button className="button__submit" onClick={handleClearTodos}>clear</button>
-      </div>
-    </form>
+    <section className="input__wrapper flex justify-center">
+      <form className="flex" onSubmit={onSubmit}>
+        <div>
+          <input
+            type="text"
+            className="text-input"
+            value={todo}
+            onChange={({ target }) => setTodo(target.value)}
+          />
+        </div>
+        <div>
+          <input type="submit" className="button__submit" value="submit" />
+        </div>
+      </form>
+      <button className="button__submit" onClick={onClear}>
+        clear
+      </button>
+    </section>
   );
 }

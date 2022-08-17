@@ -41,10 +41,7 @@ function App() {
   const handleClearTodos = async () => {
     for (let todo of todos) {
       if (todo.completed) {
-        console.log('DELETING', todo.id)
-        console.log('TODO', todo)
         await deleteTodo(todo.id);
-        console.log('DELETED')
       }
     }
     fetchData();

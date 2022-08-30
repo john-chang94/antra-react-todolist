@@ -1,17 +1,24 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
+import * as actions from "../actions";
 
-export default function Form({ handleAddTodo, handleClearTodos }) {
+function Form({ todos, addTodo, deleteTodo, getTodos }) {
   const [todo, setTodo] = useState("");
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    handleAddTodo(todo);
-
+    await addTodo(todo);
+    getTodos();
+    // clear text input
     setTodo("");
   };
 
-  const onClear = () => {
-    handleClearTodos();
+  const handleClearTodos = async () => {
+    for (let todo of todos) {
+      if (todo.completed) {
+        await deleteTodo(todo.id);
+      }
+    }
   };
 
   return (
@@ -29,9 +36,17 @@ export default function Form({ handleAddTodo, handleClearTodos }) {
           <input type="submit" className="button__submit" value="submit" />
         </div>
       </form>
-      <button className="button__submit" onClick={onClear}>
+      <button className="button__submit" onClick={handleClearTodos}>
         clear
       </button>
     </section>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    todos: state.todo.todos
+  }
+}
+
+export default connect(mapStateToProps, actions)(Form);

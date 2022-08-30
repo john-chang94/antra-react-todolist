@@ -1,21 +1,28 @@
 import React from "react";
 import Todo from "./Todo";
+import { connect } from "react-redux";
+import * as actions from "../actions";
 
-export default function TodoList({
+function TodoList({
   todos,
-  handleUpdateTodo,
-  handlePatchTodo,
-  handleDeleteTodo,
+  updateTodo,
+  patchTodo,
+  deleteTodo,
+  getTodos
 }) {
+  
+  if (!todos) return <p>Loading...</p>
+  
   return (
     <section className="todos flex flex-col">
       {todos.map((todo) => (
         <Todo
           key={todo.id}
           todo={todo}
-          handleUpdateTodo={handleUpdateTodo}
-          handlePatchTodo={handlePatchTodo}
-          handleDeleteTodo={handleDeleteTodo}
+          updateTodo={updateTodo}
+          patchTodo={patchTodo}
+          deleteTodo={deleteTodo}
+          getTodos={getTodos}
         />
       ))}
       {!todos.length && (
@@ -24,3 +31,11 @@ export default function TodoList({
     </section>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    todos: state.todo.todos
+  }
+}
+
+export default connect(mapStateToProps, actions)(TodoList);

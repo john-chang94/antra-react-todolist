@@ -1,67 +1,22 @@
 import "./App.css";
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import Form from "./components/Form";
 import TodoList from "./components/TodoList";
-import {
-  addTodo,
-  deleteTodo,
-  getTodos,
-  patchTodo,
-  updateTodo,
-} from "./services";
+import { connect } from "react-redux";
+import * as actions from "./actions";
 
-function App() {
-  const [todos, setTodos] = useState([]);
-
-  const fetchData = async () => {
-    const todos = await getTodos();
-    setTodos(todos);
-  };
-
-  const handleAddTodo = async (todo) => {
-    await addTodo(todo);
-    fetchData();
-  };
-
-  const handleUpdateTodo = async (todo, id) => {
-    await updateTodo(todo, id);
-    fetchData();
-  };
-
-  const handlePatchTodo = async (completed, id) => {
-    await patchTodo(completed, id);
-    fetchData();
-  };
-
-  const handleDeleteTodo = async (id) => {
-    await deleteTodo(id);
-    fetchData();
-  };
-
-  const handleClearTodos = async () => {
-    for (let todo of todos) {
-      if (todo.completed) {
-        await deleteTodo(todo.id);
-      }
-    }
-    fetchData();
-  };
+function App({ getTodos }) {
 
   useEffect(() => {
-    fetchData();
+    getTodos();
   }, []);
 
   return (
     <div className="container">
-      <Form handleAddTodo={handleAddTodo} handleClearTodos={handleClearTodos} />
-      <TodoList
-        todos={todos}
-        handleUpdateTodo={handleUpdateTodo}
-        handlePatchTodo={handlePatchTodo}
-        handleDeleteTodo={handleDeleteTodo}
-      />
+      <Form />
+      <TodoList />
     </div>
   );
 }
 
-export default App;
+export default connect(null, actions)(App);

@@ -2,9 +2,10 @@ import React, { useState } from "react";
 
 export default function Todo({
   todo,
-  handleUpdateTodo,
-  handlePatchTodo,
-  handleDeleteTodo,
+  updateTodo,
+  patchTodo,
+  deleteTodo,
+  getTodos
 }) {
   const [newTodo, setNewTodo] = useState("");
   const [isEditing, setIsEditing] = useState(false);
@@ -12,14 +13,25 @@ export default function Todo({
   const onClickUpdate = async (todo) => {
     if (isEditing) {
       // update todo in db if in editing mode
-      await handleUpdateTodo(newTodo, todo.id);
+      await updateTodo(newTodo, todo.id);
       setIsEditing(false);
+      getTodos()
       return;
     }
     // toggle editing mode and set current todo value in state
     setNewTodo(todo.title);
     setIsEditing(true);
   };
+
+  const handlePatchTodo = async (isCompleted, todo_id) => {
+    await patchTodo(isCompleted, todo_id);
+    getTodos();
+  }
+
+  const handleDeleteTodo = async (todo_id) => {
+    await deleteTodo(todo_id);
+    getTodos();
+  }
 
   return (
     <div

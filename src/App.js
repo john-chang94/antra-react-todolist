@@ -7,9 +7,9 @@ import * as actions from "./actions";
 
 function App({ getTodos }) {
 
-  useEffect(() => {
-    getTodos();
-  }, []);
+  // useEffect(() => {
+  //   getTodos();
+  // }, []);
 
   return (
     <div className="container">

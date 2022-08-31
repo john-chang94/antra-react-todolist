@@ -36,7 +36,7 @@ export default function Todo({
   return (
     <div
       className={`todo__wrapper flex space-between align-center ${
-        todo.completed && "todo__completed"
+        todo.isCompleted && "todo__isCompleted"
       }`}
     >
       {isEditing && (
@@ -50,7 +50,7 @@ export default function Todo({
       {!isEditing && (
         <p
           className={`todo__paragraph`}
-          onClick={() => handlePatchTodo(!todo.completed, todo.id)}
+          onClick={() => handlePatchTodo(!todo.isCompleted, todo.id)}
         >
           {todo.title}
         </p>

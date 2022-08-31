@@ -58,11 +58,11 @@ body {
   font-size: 2rem;
 }
 
-.todo__completed {
+.todo__isCompleted {
   order: 2;
 }
 
-.todo__completed p {
+.todo__isCompleted p {
   text-decoration: line-through;
 }
 

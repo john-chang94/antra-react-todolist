@@ -17,7 +17,7 @@ export const getTodos = async () => {
 export const addTodo = async (todo) => {
     try {
         const todosUrl = [BASE_URL, TODOS_PATH].join("/");
-        const data = { title: todo, completed: false };
+        const data = { title: todo, isCompleted: false };
 
         await axios.post(todosUrl, data);
     } catch (err) {
@@ -28,7 +28,7 @@ export const addTodo = async (todo) => {
 export const updateTodo = async (todo, id) => {
     try {
         const todosUrl = [BASE_URL, TODOS_PATH, id].join("/");
-        const data = { title: todo, completed: false };
+        const data = { title: todo, isCompleted: false };
 
         await axios.put(todosUrl, data);
     } catch (err) {
@@ -36,10 +36,10 @@ export const updateTodo = async (todo, id) => {
     }
 }
 
-export const patchTodo = async (completed, id) => {
+export const patchTodo = async (isCompleted, id) => {
     try {
         const todosUrl = [BASE_URL, TODOS_PATH, id].join("/");
-        const data = { completed };
+        const data = { isCompleted };
 
         await axios.patch(todosUrl, data);
     } catch (err) {

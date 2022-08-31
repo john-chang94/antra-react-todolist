@@ -15,10 +15,11 @@ function Form({ todos, addTodo, deleteTodo, getTodos }) {
 
   const handleClearTodos = async () => {
     for (let todo of todos) {
-      if (todo.completed) {
+      if (todo.isCompleted) {
         await deleteTodo(todo.id);
       }
     }
+    getTodos();
   };
 
   return (

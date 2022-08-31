@@ -6,16 +6,16 @@ import reportWebVitals from "./reportWebVitals";
 import { legacy_createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import rootReducer from "./reducers/rootReducer";
-import reduxThunk from "redux-thunk";
+import thunk from "redux-thunk";
 
-const store = legacy_createStore(rootReducer, applyMiddleware(reduxThunk));
+const store = legacy_createStore(rootReducer, applyMiddleware(thunk));
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
-    <React.StrictMode>
+    {/* <React.StrictMode> */}
       <App />
-    </React.StrictMode>
+    {/* </React.StrictMode> */}
   </Provider>
 );
 

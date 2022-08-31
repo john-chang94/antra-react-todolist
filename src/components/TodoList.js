@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Todo from "./Todo";
 import { connect } from "react-redux";
 import * as actions from "../actions";
@@ -10,6 +10,10 @@ function TodoList({
   deleteTodo,
   getTodos
 }) {
+
+  useEffect(() => {
+    getTodos();
+  }, [])
   
   if (!todos) return <p>Loading...</p>
   
